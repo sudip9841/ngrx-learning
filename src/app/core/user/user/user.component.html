@@ -1,0 +1,6 @@
+
+<ng-container *ngFor="let user of userList">
+    <p>{{user | json}}</p>
+</ng-container>
+
+<button class="btn btn-primary" (click)="onAddUser()">Add User</button>
