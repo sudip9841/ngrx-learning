@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { UserRoutingModule } from './user-routing.module';
 import { UserComponent } from './user/user.component';
 import { NbTabsetModule } from '@nebular/theme';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 
 @NgModule({
@@ -13,7 +14,8 @@ import { NbTabsetModule } from '@nebular/theme';
   imports: [
     CommonModule,
     UserRoutingModule,
-    NbTabsetModule
+    NbTabsetModule,
+    SharedModule
   ]
 })
 export class UserModule { }
