@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Store } from '@ngrx/store';
+import { Store, select } from '@ngrx/store';
 import { addUser, updateUser, deleteUser } from 'src/app/store/actions/user.action';
 import { User } from 'src/app/store/models/user.model';
 import { UserState } from 'src/app/store/reducers/user.reducre';
+import { selectUserById } from 'src/app/store/selectors/user.selector';
 
 @Component({
   selector: 'app-user',
@@ -28,6 +29,10 @@ export class UserComponent implements OnInit {
       this.userList = user?.users;
       console.log(this.userList);
     });
+
+    this.store.pipe(select(selectUserById(2))).subscribe(res=>{
+      console.log("user",res);
+    })
   }
 
   onAddUser():void{

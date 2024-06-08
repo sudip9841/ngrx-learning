@@ -7,7 +7,23 @@ export interface UserState{
 }
 
 export const initialState:UserState = {
-    users:[]
+    users:[
+        {
+            id:1,
+            name:'ram',
+            age:30
+        },
+        {
+            id:2,
+            name:'shyam',
+            age:40
+        },
+        {
+            id:1,
+            name:'hari',
+            age:50
+        },
+    ]
 }
 
 export const userReducer = createReducer(
@@ -16,9 +32,9 @@ export const userReducer = createReducer(
         ...state,users:[...state.users,user]
     })),
     on(updateUser,(state,{user})=>{
-        return {...state,users:[...state.users?.filter((item:User)=>item?.id!==user?.id),user]}
+        return {...state,users: state.users.map(item => item.id === user.id ? { ...item, ...user } : item)}
     }),
     on(deleteUser,(state,{id})=>{
-        return {...state,users:[...state.users?.filter((user:User)=>user?.id!==id)]};
+        return {...state,users:state.users?.filter((user:User)=>user?.id!==id)};
     })
 )
