@@ -9,6 +9,7 @@ import { NbThemeModule, NbLayoutModule } from '@nebular/theme';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { StoreModule } from '@ngrx/store';
 import { userReducer } from './store/reducers/user.reducre';
+import { EffectsModule } from '@ngrx/effects';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { userReducer } from './store/reducers/user.reducre';
       users:userReducer
     })),
     NbLayoutModule,
-    NbEvaIconsModule
+    NbEvaIconsModule,
+    EffectsModule.forRoot([])
   ],
   providers: [],
   bootstrap: [AppComponent]
