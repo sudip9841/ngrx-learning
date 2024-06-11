@@ -1,31 +1,56 @@
 {
-    "users": [
-        {
-            "id": 1,
-            "name": "Ram",
-            "age": 22
-        },
-        {
-            "id": 2,
-            "name": "Shyam",
-            "age": 21
-        },
-        {
-            "id": 3,
-            "name": "Hari",
-            "age": 40
-        }
-    ],
-    "posts": [
-        {
-            "id": "1",
-            "title": "a title",
-            "views": 100
-        },
-        {
-            "id": "2",
-            "title": "another title",
-            "views": 200
-        }
-    ]
+  "users": [
+    {
+      "id": 1,
+      "name": "Ram",
+      "age": 22
+    },
+    {
+      "id": 2,
+      "name": "Shyam",
+      "age": 21
+    },
+    {
+      "id": 3,
+      "name": "Hari",
+      "age": 40
+    },
+    {
+      "id": 4,
+      "name": "sita",
+      "age": 18
+    },
+    {
+      "id": 5,
+      "name": "alisha",
+      "age": 23
+    },
+    {
+      "id": 6,
+      "name": "dhoni",
+      "age": 7
+    },
+    {
+      "id": 7,
+      "name": "john",
+      "age": 50
+    },
+    {
+      "id": 8,
+      "name": "rahul",
+      "age": 22
+    }
+  ],
+  "posts": [
+    {
+      "id": "1",
+      "title": "a title",
+      "views": 100
+    },
+    {
+      "id": "2",
+      "title": "another title",
+      "views": 200
+    }
+  ]
 }

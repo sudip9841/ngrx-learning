@@ -16,8 +16,8 @@ export class UserComponent implements OnInit {
   
   userList: User[] = []
 
-  users$ = Observable<User[]>;
-  loading$ = Observable<boolean>;
+  users$ :Observable<User[]>;
+  loading$ : Observable<boolean>;
 
   userForm:FormGroup;
   constructor(private store:Store<{users:UserState}>,private formBuilder:FormBuilder) {
@@ -27,11 +27,10 @@ export class UserComponent implements OnInit {
       age:['',[Validators.required]]
     });
 
-    this.users$ = this.store.pipe(select(selectAllUser));
     this.loading$ = this.store.pipe(select(selectLoading));
+    this.users$ = this.store.pipe(select(selectAllUser));
     
    }
-
   ngOnInit(): void {
     this.loadUsers();
     // this.store.select('users').subscribe((user:any)=>{
@@ -50,7 +49,7 @@ export class UserComponent implements OnInit {
       return;
     }
     const {id} = this.userForm.value;
-    const user:User = {...this.userForm.value,id:id?id:this.userList?.length+1};
+    const user:User = {...this.userForm.value,id:id?id:null};
     this.userForm.reset();
     if(id){
       this.store.dispatch(updateUser({user:user}));
