@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Store, select } from '@ngrx/store';
-import { addUser, updateUser, deleteUser } from 'src/app/store/actions/user.action';
+import { Observable } from 'rxjs';
+import { addUser, updateUser, deleteUser, loadUsers } from 'src/app/store/actions/user.action';
 import { User } from 'src/app/store/models/user.model';
 import { UserState } from 'src/app/store/reducers/user.reducre';
-import { selectUserById } from 'src/app/store/selectors/user.selector';
+import { selectAllUser, selectLoading, selectUserById } from 'src/app/store/selectors/user.selector';
 
 @Component({
   selector: 'app-user',
@@ -15,24 +16,32 @@ export class UserComponent implements OnInit {
   
   userList: User[] = []
 
+  users$ = Observable<User[]>;
+  loading$ = Observable<boolean>;
+
   userForm:FormGroup;
-  constructor(private store:Store<UserState>,private formBuilder:FormBuilder) {
+  constructor(private store:Store<{users:UserState}>,private formBuilder:FormBuilder) {
     this.userForm = this.formBuilder.group({
       id:[''],
       name:['',[Validators.required]],
       age:['',[Validators.required]]
-    })
+    });
+
+    this.users$ = this.store.pipe(select(selectAllUser));
+    this.loading$ = this.store.pipe(select(selectLoading));
+    
    }
 
   ngOnInit(): void {
-    this.store.select('users').subscribe((user:any)=>{
-      this.userList = user?.users;
-      console.log(this.userList);
-    });
+    this.loadUsers();
+    // this.store.select('users').subscribe((user:any)=>{
+    //   this.userList = user?.users;
+    //   console.log(this.userList);
+    // });
 
-    this.store.pipe(select(selectUserById(2))).subscribe(res=>{
-      console.log("user",res);
-    })
+    // this.store.pipe(select(selectUserById(2))).subscribe(res=>{
+    //   console.log("user",res);
+    // })
   }
 
   onAddUser():void{
@@ -56,5 +65,9 @@ export class UserComponent implements OnInit {
 
   deleteUser(user:User):void{
     this.store.dispatch(deleteUser({id:user?.id}));
+  }
+
+  loadUsers():void{
+    this.store.dispatch(loadUsers());
   }
 }

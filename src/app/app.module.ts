@@ -10,7 +10,8 @@ import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { StoreModule } from '@ngrx/store';
 import { userReducer } from './store/reducers/user.reducre';
 import { EffectsModule } from '@ngrx/effects';
-
+import {HttpClientModule} from '@angular/common/http'
+import { UserEffect } from './store/effects/user.effect';
 @NgModule({
   declarations: [
     AppComponent
@@ -24,9 +25,10 @@ import { EffectsModule } from '@ngrx/effects';
     StoreModule.forRoot(({
       users:userReducer
     })),
+    EffectsModule.forRoot([UserEffect]),
     NbLayoutModule,
     NbEvaIconsModule,
-    EffectsModule.forRoot([])
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
