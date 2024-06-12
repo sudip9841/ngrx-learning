@@ -1,5 +1,5 @@
 import { createReducer, on } from "@ngrx/store";
-import { addUser, deleteUser, updateUser, loadUsers, loadUsersSuccess, loadUsersFailure } from "../actions/user.action";
+import { addUser, deleteUser, updateUser, loadUsers, loadUsersSuccess, loadUsersFailure, addUserSuccess } from "../actions/user.action";
 import { User } from "../models/user.model";
 
 export interface UserState{
@@ -10,15 +10,15 @@ export interface UserState{
 
 export const initialState:UserState = {
     users:[],
-    loading:false,
+    loading:true,
     error:null
 }
 
 export const userReducer = createReducer(
     initialState,
-    on(addUser,(state,{user})=>({
-        ...state,users:[...state.users,user]
-    })),
+    // on(addUser,(state,{user})=>({
+    //     ...state,users:[...state.users,user],loading:false
+    // })),
     on(updateUser,(state,{user})=>{
         return {...state,users: state.users.map(item => item.id === user.id ? { ...item, ...user } : item)}
     }),
@@ -33,5 +33,10 @@ export const userReducer = createReducer(
     })),
     on(loadUsersFailure,(state,{error})=>({
         ...state,error,loading:false
-    }))
+    })),
+    on(addUserSuccess, (state, { user }) => ({
+        ...state,
+        users: [...state.users, user],
+        loading:false
+      })),
 )
