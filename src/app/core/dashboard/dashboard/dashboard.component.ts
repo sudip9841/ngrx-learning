@@ -62,6 +62,7 @@ export class DashboardComponent implements OnInit {
           autoUpdateInput:true,
           alwaysShowCalendars :false,
           singleDatePicker:false,
+          applyClass:'btn-danger'
         };
 
         // if ($('#singleDatePicker').is(':checked'))
@@ -160,8 +161,8 @@ export class DashboardComponent implements OnInit {
         if ($('#buttonClasses').val()?.length && $('#buttonClasses').val() != 'btn btn-sm')
           options.buttonClasses = $('#buttonClasses').val();
 
-        if ($('#applyClass').val()?.length && $('#applyClass').val() != 'btn-success')
-          options.applyClass = $('#applyClass').val();
+        // if ($('#applyClass').val()?.length && $('#applyClass').val() != 'btn-success')
+        //   options.applyClass = $('#applyClass').val();
 
         if ($('#cancelClass').val()?.length && $('#cancelClass').val() != 'btn-default')
           options.cancelClass = $('#cancelClass').val();

@@ -49,7 +49,7 @@ export class UserComponent implements OnInit {
       return;
     }
     const {id} = this.userForm.value;
-    const user:User = {...this.userForm.value,id:id?id:null};
+    const user:User = {...this.userForm.value,id:id?id:''};
     this.userForm.reset();
     if(id){
       this.store.dispatch(updateUser({user:user}));
