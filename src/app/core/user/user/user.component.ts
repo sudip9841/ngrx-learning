@@ -16,8 +16,8 @@ export class UserComponent implements OnInit {
   
   userList: User[] = []
 
-  users$ = Observable<User[]>;
-  loading$ = Observable<boolean>;
+  users$:Observable<User[]>;
+  loading$:Observable<boolean>;
 
   userForm:FormGroup;
   constructor(private store:Store<{users:UserState}>,private formBuilder:FormBuilder) {

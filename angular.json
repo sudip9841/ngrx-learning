@@ -28,9 +28,14 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss"
+              "src/styles.scss",
+              "src/assets/libs/daterangepicker.css"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/jquery/dist/jquery.min.js",
+              "src/assets/libs/moment.min.js",
+              "src/assets/libs/daterangepicker.js"
+            ]
           },
           "configurations": {
             "production": {
