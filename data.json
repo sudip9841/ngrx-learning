@@ -9,6 +9,12 @@
       "id": "2",
       "name": "Shyam",
       "age": 21
+    },
+    {
+      "id": "",
+      "name": "barsha",
+      "age": 26,
+      "date": "11/15/2024"
     }
   ],
   "posts": [

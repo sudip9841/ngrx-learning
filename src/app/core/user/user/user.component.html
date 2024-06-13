@@ -2,7 +2,7 @@
 <div class="container mb-5">
     <!-- <app-datepicker></app-datepicker> -->
     <form [formGroup]="userForm">
-        <input formControlName="date" appDatePicker type="text" id="config-demo" class="form-control" readonly>
+        <input formControlName="date" appDatePicker type="text" id="config-demo" class="form-control" [singleDatePicker]="false" readonly>
         <div class="form-group mb-2">
           <label class="label" for="name">Name</label>
           <input type="text" class="form-control" id="name" placeholder="Enter name" formControlName="name">
