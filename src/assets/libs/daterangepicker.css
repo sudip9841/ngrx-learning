@@ -190,7 +190,7 @@
 }
 
 .daterangepicker td.in-range {
-  background-color: #ebf4f8;
+  background-color: #f8c7cc;
   border-color: transparent;
   color: #000;
   border-radius: 0;
@@ -407,4 +407,13 @@
   .daterangepicker .drp-calendar.left {
     clear: none !important;
   }
+}
+
+option:hover {
+  background-color: yellow !important;
+}
+select.decorated option:hover {
+    box-shadow: 0 0 10px 100px #1882A8 inset;
+  background-color: yellow !important;
+
 }

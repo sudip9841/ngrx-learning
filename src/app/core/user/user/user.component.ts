@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { addUser, updateUser, deleteUser, loadUsers } from 'src/app/store/actions/user.action';
@@ -24,7 +24,8 @@ export class UserComponent implements OnInit {
     this.userForm = this.formBuilder.group({
       id:[''],
       name:['',[Validators.required]],
-      age:['',[Validators.required]]
+      age:['',[Validators.required]],
+      date:['11/15/2024']
     });
 
     this.loading$ = this.store.pipe(select(selectLoading));
@@ -44,6 +45,7 @@ export class UserComponent implements OnInit {
   }
 
   onAddUser():void{
+    console.log(this.userForm.value);
     if(!this.userForm.valid){
       this.userForm.markAllAsTouched();
       return;
