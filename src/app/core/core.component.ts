@@ -8,6 +8,7 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 })
 export class CoreComponent {
   menuItems: any[] = [
+    {id:'home',title:'Home',route:'/core/home'},
     { id: 'dashboard', title: 'Dashboard', route: '/core/dashboard' },
     { id: 'user', title: 'User', route: '/core/user' }
   ];

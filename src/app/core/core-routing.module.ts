@@ -14,7 +14,7 @@ const routes: Routes = [
     children:[
       {
         path:'',
-        redirectTo:'dashboard',
+        redirectTo:'home',
         pathMatch:'full'
       },
       {
@@ -24,6 +24,10 @@ const routes: Routes = [
       {
         path:'user',
         loadChildren:()=>import('./user/user.module').then(m=>m.UserModule)
+      },
+      {
+        path:'home',
+        loadChildren:()=>import('./home/home.module').then(m=>m.HomeModule)
       }
     ]
   },

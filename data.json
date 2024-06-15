@@ -1,20 +1,14 @@
 {
   "users": [
     {
-      "id": "1",
-      "name": "Ram",
-      "age": 22
+      "name": "sita",
+      "age": 22,
+      "id": "A96tAIX"
     },
     {
-      "id": "2",
-      "name": "Shyam",
-      "age": 21
-    },
-    {
-      "id": "",
-      "name": "barsha",
-      "age": 26,
-      "date": "11/15/2024"
+      "name": "sudip",
+      "age": 24,
+      "id": "ukW63rV"
     }
   ],
   "posts": [

@@ -17,6 +17,15 @@ export class UserService {
   }
 
   addUser(user:User):Observable<User>{
-    return this.http.post<User>(`${this.url}`,user);
+    const {id,...restData} = user;
+    return this.http.post<User>(`${this.url}`,restData);
+  }
+
+  updateUser(user:User):Observable<User>{
+    return this.http.put<User>(`${this.url}/${user?.id}`,user);
+  }
+
+  deleteUser(id:string | number):Observable<User>{
+    return this.http.delete<User>(`${this.url}/${id}`);
   }
 }

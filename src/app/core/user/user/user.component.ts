@@ -25,7 +25,7 @@ export class UserComponent implements OnInit {
       id:[''],
       name:['',[Validators.required]],
       age:['',[Validators.required]],
-      date:['06/13/2024']
+      // date:['06/13/2024']
     });
 
     this.loading$ = this.store.pipe(select(selectLoading));
@@ -51,7 +51,7 @@ export class UserComponent implements OnInit {
       return;
     }
     const {id} = this.userForm.value;
-    const user:User = {...this.userForm.value,id:id?id:''};
+    const user:User = {...this.userForm.value,id:id?id:null};
     this.userForm.reset();
     if(id){
       this.store.dispatch(updateUser({user:user}));
