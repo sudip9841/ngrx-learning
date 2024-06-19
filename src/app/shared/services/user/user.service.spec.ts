@@ -13,4 +13,9 @@ describe('UserService', () => {
   it('should be created', () => {
     expect(service).toBeTruthy();
   });
+
+  it('should multiple two number',()=>{
+    const result = service.multipleTwoNumbers(5,2);
+    expect(result).toEqual(10);
+  })
 });

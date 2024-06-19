@@ -25,7 +25,6 @@ export class UserComponent implements OnInit {
       id:[''],
       name:['',[Validators.required]],
       age:['',[Validators.required]],
-      // date:['06/13/2024']
     });
 
     this.loading$ = this.store.pipe(select(selectLoading));

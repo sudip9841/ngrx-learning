@@ -28,4 +28,8 @@ export class UserService {
   deleteUser(id:string | number):Observable<User>{
     return this.http.delete<User>(`${this.url}/${id}`);
   }
+
+  multipleTwoNumbers(a:number,b:number):number{
+    return a*b;
+  }
 }
