@@ -6,6 +6,7 @@ import { addUser, updateUser, deleteUser, loadUsers } from 'src/app/store/action
 import { User } from 'src/app/store/models/user.model';
 import { UserState } from 'src/app/store/reducers/user.reducre';
 import { selectAllUser, selectLoading, selectUserById } from 'src/app/store/selectors/user.selector';
+declare var moment: any;
 
 @Component({
   selector: 'app-user',
@@ -24,7 +25,8 @@ export class UserComponent implements OnInit {
     this.userForm = this.formBuilder.group({
       id:[''],
       name:['',[Validators.required]],
-      age:['',[Validators.required]],
+      age:[''],
+      dob:['',[Validators.required]],
     });
 
     this.loading$ = this.store.pipe(select(selectLoading));
@@ -33,6 +35,8 @@ export class UserComponent implements OnInit {
    }
   ngOnInit(): void {
     this.loadUsers();
+    this.onFormControlChange();
+    this.userForm.get('dob')?.setValue(moment().format('MM/DD/YYYY'));
     // this.store.select('users').subscribe((user:any)=>{
     //   this.userList = user?.users;
     //   console.log(this.userList);
@@ -69,5 +73,17 @@ export class UserComponent implements OnInit {
 
   loadUsers():void{
     this.store.dispatch(loadUsers());
+  }
+
+  onFormControlChange():void{
+    this.userForm.get('dob')?.valueChanges.subscribe((dob:string)=>{
+      if(dob){
+        const currentDate = moment();
+        const age = currentDate.diff(dob,'years')+1;
+        this.userForm.get('age')?.setValue(age);
+      }else{
+        this.userForm.get('age')?.reset();
+      }
+    })
   }
 }

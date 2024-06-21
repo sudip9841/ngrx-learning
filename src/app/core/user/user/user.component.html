@@ -2,15 +2,6 @@
 <div class="container mb-5">
     <!-- <app-datepicker></app-datepicker> -->
     <form [formGroup]="userForm">
-        <!-- <div class="form-group mb-2">
-            <label class="label" for="date">Date</label>
-            <input formControlName="date" appDatePicker type="text" id="config-demo" class="form-control" [singleDatePicker]="false" readonly>
-            <ng-container *ngIf="userForm.get('date')?.errors && (userForm.get('date')?.touched || userForm.get('date')?.dirty)">
-                <ng-container *ngIf="userForm.get('date')?.errors?.['required']">
-                    <p class="text-danger">Date is required.</p>
-                </ng-container>
-            </ng-container>
-        </div> -->
         <div class="form-group mb-2">
           <label class="label" for="name">Name</label>
           <input type="text" class="form-control" id="name" placeholder="Enter name" formControlName="name">
@@ -21,14 +12,23 @@
             </ng-container>
         </div>
         <div class="form-group mb-2">
+            <label class="label" for="dob">DOB</label>
+            <input formControlName="dob" appDatePicker type="text" id="config-demo" class="form-control" [singleDatePicker]="true" readonly>
+            <ng-container *ngIf="userForm.get('dob')?.errors && (userForm.get('dob')?.touched || userForm.get('dob')?.dirty)">
+                <ng-container *ngIf="userForm.get('dob')?.errors?.['required']">
+                    <p class="text-danger">DOB is required.</p>
+                </ng-container>
+            </ng-container>
+        </div>
+        <!-- <div class="form-group mb-2">
             <label class="label" for="age">Age</label>
-            <input type="number" class="form-control" id="age" placeholder="Enter age" formControlName="age">
+            <input readonly type="number" class="form-control" id="age" formControlName="age">
             <ng-container *ngIf="userForm.get('age')?.errors && (userForm.get('age')?.touched || userForm.get('age')?.dirty)">
                 <ng-container *ngIf="userForm.get('age')?.errors?.['required']">
                     <p class="text-danger">Age is required.</p>
                 </ng-container>
             </ng-container>
-        </div>
+        </div> -->
         <div class="d-flex">
             <button [disabled]="!this.userForm.valid" class="btn btn-sm btn-primary mx-2" (click)="onAddUser()">{{this.userForm.get('id')?.value?'Update':'Add'}}</button>
             <button class="btn btn-sm btn-danger" type="reset">Reset</button>
@@ -41,6 +41,7 @@
       <tr>
         <th scope="col">Id</th>
         <th scope="col">Name</th>
+        <th scope="col">DOB</th>
         <th scope="col">Age</th>
         <th scope="col">Action</th>
       </tr>
@@ -58,6 +59,7 @@
                 <tr>
                     <th>{{user?.id}}</th>
                     <th>{{user?.name}}</th>
+                    <th>{{user?.dob}}</th>
                     <th>{{user?.age}}</th>
                     <th>
                         <button class="btn btn-success btn-sm mx-2" (click)="editUser(user)">Edit</button>

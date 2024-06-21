@@ -1,14 +1,16 @@
 {
   "users": [
     {
-      "id": "A96tAIX",
-      "name": "sita",
-      "age": 26
+      "name": "Sudip Tamang",
+      "age": 25,
+      "dob": "1999-07-03",
+      "id": 1
     },
     {
-      "name": "sudip",
-      "age": 24,
-      "id": "ukW63rV"
+      "name": "juni",
+      "age": 35,
+      "dob": "1989-10-03",
+      "id": 3
     }
   ],
   "posts": [
