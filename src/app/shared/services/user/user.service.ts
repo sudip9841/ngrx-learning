@@ -32,4 +32,8 @@ export class UserService {
   multipleTwoNumbers(a:number,b:number):number{
     return a*b;
   }
+  
+  displayName():string{
+    return "Sudip"
+  }
 }
