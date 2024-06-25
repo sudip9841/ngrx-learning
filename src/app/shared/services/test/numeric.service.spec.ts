@@ -2,14 +2,17 @@ import { TestBed } from '@angular/core/testing';
 import {HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing'
 import { NumericService } from './numeric.service';
 import { UserService } from '../user/user.service';
+import { environment } from 'src/environments/environment';
 
 export const users = {
   1:{
+    id:1,
     name:'sudip',
     age:'24',
     dob:'1999-07-03'
   },
   2:{
+    id:2,
     name:'hari',
     age:'23',
     dob:'2000-07-03'
@@ -51,8 +54,21 @@ fdescribe('NumericService', () => {
       expect(users).toBeTruthy();
       expect(users.length).toBe(2);
     });
-    const mockReq = testingController.expectOne('http://localhost:3000/users');
+    const mockReq = testingController.expectOne(`${environment.api_url}/users`);
     expect(mockReq.request.method).toBe('GET');
     mockReq.flush(Object.values(users))
   })
+
+  it("should return user with specific id",()=>{
+    userService.getUserById(2).subscribe((user:any)=>{
+      console.log(user);
+      expect(user).toBeTruthy();
+      expect(user?.id).toBe(2);
+    });
+
+    const mockReq = testingController.expectOne(`${environment.api_url}/users/2`);
+    expect(mockReq.request.method).toBe('GET');
+    mockReq.flush(Object.values(users))
+  })
+
 });
