@@ -10,8 +10,15 @@ import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { StoreModule } from '@ngrx/store';
 import { userReducer } from './store/reducers/user.reducre';
 import { EffectsModule } from '@ngrx/effects';
-import {HttpClientModule} from '@angular/common/http'
+import {HttpClient, HttpClientModule} from '@angular/common/http'
 import { UserEffect } from './store/effects/user.effect';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import {TranslateHttpLoader} from '@ngx-translate/http-loader';
+
+export function createTranslateLoader(http: HttpClient) {
+  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
+}
+
 @NgModule({
   declarations: [
     AppComponent
@@ -26,6 +33,14 @@ import { UserEffect } from './store/effects/user.effect';
       users:userReducer
     })),
     EffectsModule.forRoot([UserEffect]),
+    TranslateModule.forRoot({
+      defaultLanguage: 'en',
+      loader: {
+          provide: TranslateLoader,
+          useFactory: (createTranslateLoader),
+          deps: [HttpClient]
+      }
+  }),
     NbLayoutModule,
     NbEvaIconsModule,
     HttpClientModule

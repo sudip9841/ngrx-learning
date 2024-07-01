@@ -6,7 +6,10 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "compodoc:build": "compodoc -p tsconfig.doc.json",
+    "compodoc:build-and-serve": "compodoc -p tsconfig.doc.json -s",
+    "compodoc:serve": "compodoc -s"
   },
   "private": true,
   "dependencies": {
@@ -24,6 +27,8 @@
     "@ng-bootstrap/ng-bootstrap": "^13.1.1",
     "@ngrx/effects": "^14.3.3",
     "@ngrx/store": "^14.3.3",
+    "@ngx-translate/core": "^14.0.0",
+    "@ngx-translate/http-loader": "^7.0.0",
     "@popperjs/core": "^2.10.2",
     "bootstrap": "^5.2.0",
     "eva-icons": "^1.1.2",
@@ -37,6 +42,7 @@
     "@angular/cli": "~14.2.13",
     "@angular/compiler-cli": "^14.2.0",
     "@angular/localize": "^14.2.0",
+    "@compodoc/compodoc": "^1.1.25",
     "@schematics/angular": "~14.2.13",
     "@types/jasmine": "~4.0.0",
     "@types/jquery": "^3.5.30",

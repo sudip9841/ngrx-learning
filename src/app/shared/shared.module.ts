@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DatepickerComponent } from './components/datepicker/datepicker.component';
 import { DatePickerDirective } from './directives/date-picker.directive';
+import { TranslateModule } from '@ngx-translate/core';
 
 
 
@@ -14,13 +15,15 @@ import { DatePickerDirective } from './directives/date-picker.directive';
   imports: [
     CommonModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    TranslateModule
   ],
   exports:[
     FormsModule,
     ReactiveFormsModule,
     DatepickerComponent,
-    DatePickerDirective
+    DatePickerDirective,
+    TranslateModule
   ]
 })
 export class SharedModule { }

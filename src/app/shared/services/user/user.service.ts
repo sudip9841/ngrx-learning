@@ -16,6 +16,11 @@ export class UserService {
     return this.http.get<User[]>(`${this.url}`);
   }
 
+  /**
+   * sdfgfdsadfdsadf
+   * @param user takes user and if test
+   * @returns 
+   */
   addUser(user: User): Observable<User> {
     const { id, ...restData } = user;
     return this.http.post<User>(`${this.url}`, restData);
