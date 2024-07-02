@@ -1,16 +1,11 @@
 {
   "users": [
     {
-      "name": "Sudip Tamang",
-      "age": 25,
-      "dob": "1999-07-03",
-      "id": 1
-    },
-    {
-      "name": "juni",
-      "age": 35,
-      "dob": "1989-10-03",
-      "id": 3
+      "id": "a274",
+      "name": "Sudip",
+      "age": 23,
+      "dob": "2001-07-05",
+      "nameNp": "सुदीप"
     }
   ],
   "posts": [

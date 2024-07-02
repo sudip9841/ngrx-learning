@@ -14,6 +14,9 @@ import {HttpClient, HttpClientModule} from '@angular/common/http'
 import { UserEffect } from './store/effects/user.effect';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
+import { TranslateLoaderFactor } from './utils/language-translate/common-translate-loader';
+import { SharedModule } from './shared/shared.module';
+import { CommonTranslateSubscriber } from './utils/language-translate/common-translate-subscriber';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, '../assets/i18n/', '.json');
@@ -33,14 +36,17 @@ export function createTranslateLoader(http: HttpClient) {
       users:userReducer
     })),
     EffectsModule.forRoot([UserEffect]),
+    SharedModule,
     TranslateModule.forRoot({
-      defaultLanguage: 'en',
+      defaultLanguage:'en',
       loader: {
-          provide: TranslateLoader,
-          useFactory: (createTranslateLoader),
-          deps: [HttpClient]
-      }
-  }),
+        provide: TranslateLoader,
+        useClass: TranslateLoaderFactor.forModule(),
+        deps: [HttpClient]
+      },
+      isolate: false,
+      extend: true
+    }),
     NbLayoutModule,
     NbEvaIconsModule,
     HttpClientModule
@@ -48,4 +54,7 @@ export function createTranslateLoader(http: HttpClient) {
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+  constructor(private commonTranslateSubscriber: CommonTranslateSubscriber) {
+  }
+ }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store, select } from '@ngrx/store';
+import { TranslateService } from '@ngx-translate/core';
 import { Observable } from 'rxjs';
 import { addUser, updateUser, deleteUser, loadUsers } from 'src/app/store/actions/user.action';
 import { User } from 'src/app/store/models/user.model';
@@ -21,12 +22,13 @@ export class UserComponent implements OnInit {
   loading$ : Observable<boolean>;
 
   userForm:FormGroup;
-  constructor(private store:Store<{users:UserState}>,private formBuilder:FormBuilder) {
+  constructor(private store:Store<{users:UserState}>,private formBuilder:FormBuilder,private translate:TranslateService) {
     this.userForm = this.formBuilder.group({
       id:[''],
       name:['',[Validators.required]],
       age:[''],
       dob:['',[Validators.required]],
+      nameNp:['',[Validators.required]]
     });
 
     this.loading$ = this.store.pipe(select(selectLoading));

@@ -1,0 +1,15 @@
+{
+    "name":"Name",
+    "dob":"Date of Birth",
+    "reset":"Reset",
+    "nameRequired":"Name is required",
+    "dobRequired":"Date of Birth is Required",
+    "id":"Id",
+    "age":"Age",
+    "action":"Action",
+    "nepali":"Nepali",
+    "add":"Add",
+    "update":"Update",
+    "edit":"Edit",
+    "delete":"Delete"
+}

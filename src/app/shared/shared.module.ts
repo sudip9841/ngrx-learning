@@ -4,26 +4,35 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DatepickerComponent } from './components/datepicker/datepicker.component';
 import { DatePickerDirective } from './directives/date-picker.directive';
 import { TranslateModule } from '@ngx-translate/core';
+import { LocalLangChangePipe } from './pipes/local-lang-change/local-lang-change.pipe';
+import { HttpClientModule } from '@angular/common/http';
+import { EngToNepNumberPipe } from './pipes/eng-to-nep-number/eng-to-nep-number.pipe';
 
 
 
 @NgModule({
   declarations: [
     DatepickerComponent,
-    DatePickerDirective
+    DatePickerDirective,
+    LocalLangChangePipe,
+    EngToNepNumberPipe
   ],
   imports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    TranslateModule
+    // TranslateModule
+    HttpClientModule
   ],
   exports:[
     FormsModule,
     ReactiveFormsModule,
     DatepickerComponent,
     DatePickerDirective,
-    TranslateModule
+    // TranslateModule,
+    LocalLangChangePipe,
+    HttpClientModule,
+    EngToNepNumberPipe
   ]
 })
 export class SharedModule { }
