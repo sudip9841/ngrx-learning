@@ -1,0 +1,45 @@
+<table cdk-table [dataSource]="dataSource">
+    <ng-container *ngFor="let col of manageColumns">
+        <ng-container *ngIf="!col?.action; else action">
+            <ng-container cdkColumnDef="{{col?.key}}">
+                <th cdk-header-cell *cdkHeaderCellDef> {{col?.title}} </th>
+                <td cdk-cell *cdkCellDef="let element"> {{element[col.key]}}</td>
+            </ng-container>
+        </ng-container>
+        <ng-template #action>
+            <ng-container cdkColumnDef="action">
+                <th cdk-header-cell *cdkHeaderCellDef>Action</th>
+                <td cdk-cell *cdkCellDef="let element" class="d-flex" style="gap: 5px;">
+                    <ng-container *ngFor="let action of col?.actionList">
+                            <ng-container *ngIf="action?.actionType==='view'">
+                                <button class="btn btn-sm btn-primary">View</button>
+                            </ng-container>
+                            <ng-container *ngIf="action?.actionType==='delete'">
+                                <button class="btn btn-sm btn-danger">Delete</button>
+                            </ng-container>
+                            <ng-container *ngIf="action?.actionType==='edit'">
+                                <button class="btn btn-sm btn-success">Edit</button>
+                            </ng-container>
+                    </ng-container>
+                </td>
+            </ng-container>
+            <!-- <ng-container cdkColumnDef="action">
+                <ng-container *ngFor="let action of col?.actionList">
+                    <ng-container *ngIf="action?.actionType==='view'">
+                        <button class="btn btn-sm btn-primary">View</button>
+                    </ng-container>
+                    <ng-container *ngIf="action?.actionType==='delete'">
+                        <button class="btn btn-sm btn-danger">Delete</button>
+                    </ng-container>
+                    <ng-container *ngIf="action?.actionType==='edit'">
+                        <button class="btn btn-sm btn-success">Edit</button>
+                    </ng-container>
+                </ng-container>
+            </ng-container> -->
+        </ng-template>
+    </ng-container>
+  
+    <tr cdk-header-row *cdkHeaderRowDef="displayedColumns"></tr>
+    <tr cdk-row *cdkRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+  
