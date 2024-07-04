@@ -11,6 +11,7 @@ import { TranslateLoaderFactor } from 'src/app/utils/language-translate/common-t
 import { HttpClient } from '@angular/common/http';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { CommonTranslateSubscriber } from 'src/app/utils/language-translate/common-translate-subscriber';
+import { DataTableModule } from 'src/app/shared/module/data-table/data-table.module';
 
 export function createTranslateLoader(http: HttpClient) {
   console.log("inside create transation loader")
@@ -37,6 +38,7 @@ export function createTranslateLoader(http: HttpClient) {
       isolate: false,
       extend: true
     }),
+    DataTableModule
   ]
 })
 export class UserModule {
