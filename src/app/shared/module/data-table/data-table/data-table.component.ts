@@ -1,5 +1,5 @@
 import { DataSource } from '@angular/cdk/collections';
-import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { BehaviorSubject, Observable } from 'rxjs';
 
@@ -40,12 +40,16 @@ export interface IMangeColumns{
 @Component({
   selector: 'app-data-table',
   templateUrl: './data-table.component.html',
-  styleUrls: ['./data-table.component.scss']
+  styleUrls: ['./data-table.component.scss'],
 })
 export class DataTableComponent implements OnInit, OnChanges {
 
   @Input() dataSource: any[] = [];
   @Input() manageColumns:IMangeColumns[] = [];
+
+  @Output() onViweClick:EventEmitter<any> = new EventEmitter();
+  @Output() onEditClick:EventEmitter<any> = new EventEmitter();
+  @Output() onDeleteClick:EventEmitter<any> = new EventEmitter();
 
   displayedColumns: string[] = [];
  
@@ -71,6 +75,18 @@ export class DataTableComponent implements OnInit, OnChanges {
   domSanitize(element:string|undefined){
     if(!element) return '';
     return this.sanitizer.bypassSecurityTrustHtml(element);
+  }
+
+  viewClick(element:any){
+    this.onViweClick.emit(element);
+  }
+
+  editClick(element:any){
+    this.onEditClick.emit(element);
+  }
+
+  deleteClick(element:any){
+    this.onDeleteClick.emit(element);
   }
 
 }

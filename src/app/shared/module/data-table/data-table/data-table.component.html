@@ -5,7 +5,7 @@
                 <th cdk-header-cell *cdkHeaderCellDef> {{col?.title}} </th>
                 <td cdk-cell *cdkCellDef="let element">
                     <ng-container *ngIf="col?.renderCell; else normalCell">
-                        <div class="d-inline-block" (click)="col?.postRenderCell(element)" [innerHTML]="domSanitize(col?.renderCell(element))"></div>
+                        <div class="d-inline-block" (click)="col?.postRenderCell && col?.postRenderCell(element)" [innerHTML]="domSanitize(col?.renderCell(element))"></div>
                     </ng-container>
                     <ng-template #normalCell>
                         {{element[col.key]}}
@@ -19,13 +19,13 @@
                 <td cdk-cell *cdkCellDef="let element" class="d-flex" style="gap: 5px;">
                     <ng-container *ngFor="let action of col?.actionList">
                             <ng-container *ngIf="action?.actionType==='view'">
-                                <button class="btn btn-sm btn-primary">View</button>
+                                <button (click)="viewClick(element)" class="btn btn-sm btn-primary">View</button>
                             </ng-container>
                             <ng-container *ngIf="action?.actionType==='delete'">
-                                <button class="btn btn-sm btn-danger">Delete</button>
+                                <button (click)="deleteClick(element)" class="btn btn-sm btn-danger">Delete</button>
                             </ng-container>
                             <ng-container *ngIf="action?.actionType==='edit'">
-                                <button class="btn btn-sm btn-success">Edit</button>
+                                <button (click)="editClick(element)" class="btn btn-sm btn-success">Edit</button>
                             </ng-container>
                     </ng-container>
                 </td>

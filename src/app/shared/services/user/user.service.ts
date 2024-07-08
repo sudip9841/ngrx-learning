@@ -72,7 +72,7 @@ export class UserService {
     let columns:IMangeColumns[] =  [
       {title:'Position',key:'position'},
       {title:'Name',key:'name',renderCell:(row:any)=>{
-        console.log("in name row",row)
+        // console.log("in name row",row)
         return `<button id=${row?.position} class="btn btn-sm btn-primary">${row?.name}</button>`;
       },
       postRenderCell:(row:any)=>{
@@ -87,8 +87,6 @@ export class UserService {
         }else{
           return `less than 10`
         }
-      },postRenderCell:(row:any)=>{
-        alert(row?.weight)
       }},
       {title:'Symbol',key:'symbol'},
       {title:"Action",key:'action',action:true,actionList:[

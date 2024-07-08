@@ -103,5 +103,17 @@ export class UserComponent implements OnInit {
     this.dataSoruce = this.userService.getDummyDataSource();
     this.manageColumns = this.userService.manageColumns();
   }
+
+  editClick(event:any){
+    console.log("edit",event);
+  }
+
+  viewClick(event:any){
+    console.log("view",event);
+  }
+
+  deleteClick(event:any){
+    console.log("delete",event);
+  }
   
 }

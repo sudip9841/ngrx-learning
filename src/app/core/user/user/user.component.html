@@ -82,7 +82,9 @@
     </tbody>
 </table> -->
 
-<app-data-table [manageColumns]="manageColumns" [dataSource]="dataSoruce"></app-data-table>
+<app-data-table [manageColumns]="manageColumns" [dataSource]="dataSoruce" (onEditClick)="editClick($event)"
+(onViewClick)="viewClick($event)"
+(onDeleteClick)="deleteClick($event)"></app-data-table>
 
 <!-- <div class="card">
     <div class="card-body">
