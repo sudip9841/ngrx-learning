@@ -1,5 +1,6 @@
 import { DataSource } from '@angular/cdk/collections';
 import { Component, OnInit } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
 import { BehaviorSubject, Observable } from 'rxjs';
 
 export interface PeriodicElement {
@@ -32,6 +33,8 @@ export interface IMangeColumns{
   key:string;
   action?:boolean;
   actionList?:IActionList[];
+  renderCell?:(row:any)=>string;
+  postRenderCell?:(row:any)=>void;
 }
 
 @Component({
@@ -57,11 +60,28 @@ export class DataTableComponent implements OnInit {
 
   manageColumns:IMangeColumns[];
 
-  constructor() {
+  constructor(private sanitizer:DomSanitizer) {
     this.manageColumns = [
       {title:'Position',key:'position'},
-      {title:'Name',key:'name'},
-      {title:'Weight',key:'weight'},
+      {title:'Name',key:'name',renderCell:(row:any)=>{
+        console.log("in name row",row)
+        return `<button id=${row?.position} class="btn btn-sm btn-primary">${row?.name}</button>`;
+      },
+      postRenderCell:(row:any)=>{
+        alert(row?.name)
+      }
+    },
+      {title:'Weight',key:'weight', renderCell:(row:any)=>{
+        let data = row?.weight;
+        // return data;
+        if(data>10){
+          return `greater than 10`
+        }else{
+          return `less than 10`
+        }
+      },postRenderCell:(row:any)=>{
+        alert(row?.weight)
+      }},
       {title:'Symbol',key:'symbol'},
       {title:"Action",key:'',action:true,actionList:[
         {actionType:'edit',buttonPermission:''},
@@ -70,6 +90,11 @@ export class DataTableComponent implements OnInit {
     ]
    }
   ngOnInit(): void {
+  }
+
+  domSanitize(element:string|undefined){
+    if(!element) return '';
+    return this.sanitizer.bypassSecurityTrustHtml(element);
   }
 
 }

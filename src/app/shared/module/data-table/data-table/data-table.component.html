@@ -3,7 +3,15 @@
         <ng-container *ngIf="!col?.action; else action">
             <ng-container cdkColumnDef="{{col?.key}}">
                 <th cdk-header-cell *cdkHeaderCellDef> {{col?.title}} </th>
-                <td cdk-cell *cdkCellDef="let element"> {{element[col.key]}}</td>
+                <td cdk-cell *cdkCellDef="let element">
+                    <ng-container *ngIf="col?.renderCell; else normalCell">
+                        <div (click)="col?.postRenderCell(element)" [innerHTML]="domSanitize(col?.renderCell(element))"></div>
+                    </ng-container>
+                    <ng-template #normalCell>
+                        {{element[col.key]}}
+                    </ng-template>
+                    <!-- {{col?.renderCell ? col.renderCell(element) : element[col.key]}} -->
+                </td>
             </ng-container>
         </ng-container>
         <ng-template #action>
@@ -23,19 +31,6 @@
                     </ng-container>
                 </td>
             </ng-container>
-            <!-- <ng-container cdkColumnDef="action">
-                <ng-container *ngFor="let action of col?.actionList">
-                    <ng-container *ngIf="action?.actionType==='view'">
-                        <button class="btn btn-sm btn-primary">View</button>
-                    </ng-container>
-                    <ng-container *ngIf="action?.actionType==='delete'">
-                        <button class="btn btn-sm btn-danger">Delete</button>
-                    </ng-container>
-                    <ng-container *ngIf="action?.actionType==='edit'">
-                        <button class="btn btn-sm btn-success">Edit</button>
-                    </ng-container>
-                </ng-container>
-            </ng-container> -->
         </ng-template>
     </ng-container>
   
