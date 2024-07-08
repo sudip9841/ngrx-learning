@@ -3,6 +3,8 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { Store, select } from '@ngrx/store';
 import { TranslateService } from '@ngx-translate/core';
 import { Observable } from 'rxjs';
+import { IMangeColumns } from 'src/app/shared/module/data-table/data-table/data-table.component';
+import { UserService } from 'src/app/shared/services/user/user.service';
 import { addUser, updateUser, deleteUser, loadUsers } from 'src/app/store/actions/user.action';
 import { User } from 'src/app/store/models/user.model';
 import { UserState } from 'src/app/store/reducers/user.reducre';
@@ -22,7 +24,14 @@ export class UserComponent implements OnInit {
   loading$ : Observable<boolean>;
 
   userForm:FormGroup;
-  constructor(private store:Store<{users:UserState}>,private formBuilder:FormBuilder,private translate:TranslateService) {
+
+  //for table
+  manageColumns:IMangeColumns[] = [];
+  dataSoruce:any[] = [];
+
+  constructor(private store:Store<{users:UserState}>,private formBuilder:FormBuilder,private translate:TranslateService,
+    private userService:UserService
+  ) {
     this.userForm = this.formBuilder.group({
       id:[''],
       name:['',[Validators.required]],
@@ -47,6 +56,7 @@ export class UserComponent implements OnInit {
     // this.store.pipe(select(selectUserById(2))).subscribe(res=>{
     //   console.log("user",res);
     // })
+    this.setDataTableData();
   }
 
   onAddUser():void{
@@ -88,4 +98,10 @@ export class UserComponent implements OnInit {
       }
     })
   }
+
+  setDataTableData():void{
+    this.dataSoruce = this.userService.getDummyDataSource();
+    this.manageColumns = this.userService.manageColumns();
+  }
+  
 }
