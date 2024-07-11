@@ -1,8 +1,11 @@
 <table cdk-table [dataSource]="dataSource">
-    <ng-container *ngFor="let col of manageColumns">
+    <ng-container *ngFor="let col of columnDefinitions">
         <ng-container *ngIf="!col?.action; else action">
             <ng-container cdkColumnDef="{{col?.key}}">
-                <th cdk-header-cell *cdkHeaderCellDef> {{col?.title}} </th>
+                <th cdk-header-cell *cdkHeaderCellDef
+                [attr.rowspan]="col.rowspan ? col.rowspan : null"
+                [attr.colspan]="col.colspan ? col.colspan : null"
+                style="border-right: 1px solid rgb(201, 201, 201)"> {{col?.title}} </th>
                 <td cdk-cell *cdkCellDef="let element">
                     <ng-container *ngIf="col?.renderCell; else normalCell">
                         <div class="d-inline-block" (click)="col?.postRenderCell && col?.postRenderCell(element)" [innerHTML]="domSanitize(col?.renderCell(element))"></div>
@@ -14,8 +17,11 @@
             </ng-container>
         </ng-container>
         <ng-template #action>
-            <ng-container cdkColumnDef="action">
-                <th cdk-header-cell *cdkHeaderCellDef>Action</th>
+            <ng-container cdkColumnDef="{{col?.key}}">
+                <th cdk-header-cell *cdkHeaderCellDef
+                [attr.rowspan]="col.rowspan ? col.rowspan : null"
+                [attr.colspan]="col.colspan ? col.colspan : null"
+                style="border-right: 1px solid rgb(201, 201, 201)">{{col?.title}}</th>
                 <td cdk-cell *cdkCellDef="let element" class="d-flex" style="gap: 5px;">
                     <ng-container *ngFor="let action of col?.actionList">
                             <ng-container *ngIf="action?.actionType==='view'">
@@ -33,7 +39,12 @@
         </ng-template>
     </ng-container>
   
-    <tr cdk-header-row *cdkHeaderRowDef="displayedColumns"></tr>
-    <tr cdk-row *cdkRowDef="let row; columns: displayedColumns;"></tr>
+    <!-- <tr cdk-header-row *cdkHeaderRowDef="displayedColumns"></tr>
+    <tr cdk-row *cdkRowDef="let row; columns: displayedColumns;"></tr> -->
+
+    <tr cdk-header-row *cdkHeaderRowDef="headers"></tr>
+    <tr cdk-header-row *cdkHeaderRowDef="subHeaders"></tr>
+  
+    <tr cdk-row *cdkRowDef="let row; columns: dataRow"></tr>
 </table>
   

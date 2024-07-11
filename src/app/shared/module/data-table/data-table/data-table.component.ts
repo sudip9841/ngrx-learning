@@ -35,6 +35,7 @@ export interface IMangeColumns{
   actionList?:IActionList[];
   renderCell?:(row:any)=>string;
   postRenderCell?:(row:any)=>void;
+  subHeaders?:IMangeColumns[];
 }
 
 @Component({
@@ -51,14 +52,20 @@ export class DataTableComponent implements OnInit, OnChanges {
   @Output() onEditClick:EventEmitter<any> = new EventEmitter();
   @Output() onDeleteClick:EventEmitter<any> = new EventEmitter();
 
-  displayedColumns: string[] = [];
+  // displayedColumns: string[] = [];
+
+  headers: string[] = [];
+  subHeaders: string[] = [];
+  dataRow: string[] = [];
+  columnDefinitions : any[] = [];
+
  
   constructor(private sanitizer:DomSanitizer) {
 
    }
 
   ngOnInit(): void {
-
+    this.setTableConfig();
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -67,7 +74,7 @@ export class DataTableComponent implements OnInit, OnChanges {
     }
     if(changes?.['manageColumns']?.currentValue){
       this.manageColumns = changes?.['manageColumns']?.currentValue;
-      this.displayedColumns = this.manageColumns?.map((item:any)=>(item?.key))
+      // this.displayedColumns = this.manageColumns?.map((item:any)=>(item?.key))
     }
   }
 
@@ -87,6 +94,42 @@ export class DataTableComponent implements OnInit, OnChanges {
 
   deleteClick(element:any){
     this.onDeleteClick.emit(element);
+  }
+
+  setTableConfig():void{
+    this.manageColumns?.forEach((ele:IMangeColumns)=>{
+      this.headers.push(ele.key || ele.title);
+     
+      if(ele?.subHeaders?.length){
+        this.columnDefinitions.push({
+          ...ele,
+          key: ele.key || ele.title,
+          colspan:ele?.subHeaders?.length
+        })
+        ele?.subHeaders.forEach((subEle:IMangeColumns)=>{
+          this.subHeaders.push(subEle.key || subEle.title);
+          this.dataRow.push(subEle.key || subEle.title)
+          this.columnDefinitions.push({
+            ...subEle,
+            key: subEle.key || subEle.title,
+            rowspan:2
+          })
+        })
+      }
+      else{
+          this.dataRow.push(ele.key || ele.title)
+          this.columnDefinitions.push({
+            ...ele,
+            key:ele.key || ele.title,
+            rowspan:2
+          })
+      }
+    })
+
+    console.log("col def",this.columnDefinitions);
+    console.log("headers",this.headers);
+    console.log("sub headers",this.subHeaders);
+    console.log("data row",this.dataRow)
   }
 
 }

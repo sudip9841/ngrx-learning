@@ -228,12 +228,12 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(store: Store<literal type>)</code>
+<code>constructor(store: Store<literal type>, translate: TranslateService, localStorageService: <a href="../injectables/LocalStorageService.html" target="_self">LocalStorageService</a>)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="16" class="link-to-prism">src/app/core/home/home/home.component.ts:16</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="17" class="link-to-prism">src/app/core/home/home/home.component.ts:17</a></div>
                             </td>
                         </tr>
 
@@ -255,6 +255,30 @@
                                                   
                                                         <td>
                                                                     <code>Store&lt;literal type&gt;</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>translate</td>
+                                                  
+                                                        <td>
+                                                                    <code>TranslateService</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>localStorageService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/LocalStorageService.html" target="_self" >LocalStorageService</a></code>
                                                         </td>
                                                   
                                                     <td>
@@ -300,8 +324,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="21"
-                                    class="link-to-prism">src/app/core/home/home/home.component.ts:21</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="24"
+                                    class="link-to-prism">src/app/core/home/home/home.component.ts:24</a></div>
                         </td>
                     </tr>
 
@@ -342,7 +366,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="16" class="link-to-prism">src/app/core/home/home/home.component.ts:16</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="17" class="link-to-prism">src/app/core/home/home/home.component.ts:17</a></div>
                         </td>
                     </tr>
 
@@ -357,7 +381,9 @@
     <div class="tab-pane fade  tab-source-code" id="source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnInit } from &#x27;@angular/core&#x27;;
 import { Store, select } from &#x27;@ngrx/store&#x27;;
+import { TranslateService } from &#x27;@ngx-translate/core&#x27;;
 import { Observable } from &#x27;rxjs&#x27;;
+import { LocalStorageService } from &#x27;src/app/shared/services/local-storage/local-storage.service&#x27;;
 import { loadUsers } from &#x27;src/app/store/actions/user.action&#x27;;
 import { User } from &#x27;src/app/store/models/user.model&#x27;;
 import { UserState } from &#x27;src/app/store/reducers/user.reducre&#x27;;
@@ -369,25 +395,29 @@ import { selectAllUser } from &#x27;src/app/store/selectors/user.selector&#x27;;
   styleUrls: [&#x27;./home.component.scss&#x27;]
 })
 export class HomeComponent implements OnInit {
-
   usersList$:Observable&lt;User[]&gt;;
-  constructor(private store:Store&lt;{users:UserState}&gt;) { 
+  constructor(private store:Store&lt;{users:UserState}&gt;,private translate: TranslateService,
+    private localStorageService:LocalStorageService
+  ) { 
     this.usersList$ &#x3D; this.store.pipe(select(selectAllUser));
   }
 
   ngOnInit(): void {
     this.store.dispatch(loadUsers());
   }
-
 }
 </code></pre>
     </div>
 
     <div class="tab-pane fade " id="templateData">
-        <pre class="line-numbers"><code class="language-html">&lt;ng-container *ngFor&#x3D;&quot;let user of usersList$ | async&quot;&gt;
+        <pre class="line-numbers"><code class="language-html">&lt;!-- &lt;ng-container *ngFor&#x3D;&quot;let user of usersList$ | async&quot;&gt;
     &lt;p&gt;{{user | json}}&lt;/p&gt;
-&lt;/ng-container&gt;
-</code></pre>
+&lt;/ng-container&gt; --&gt;
+
+
+&lt;p&gt;{{&#x27;home&#x27; | translate}}&lt;/p&gt;
+
+&lt;!-- &lt;h1&gt;{{&#x27;barsha&#x27; | translate}}&lt;/h1&gt; --&gt;</code></pre>
     </div>
 
     <div class="tab-pane fade " id="styleData">
@@ -422,8 +452,8 @@ export class HomeComponent implements OnInit {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><ng-container *ngFor="let user of usersList$ | async">    <p>{{user | json}}</p></ng-container></div>'
-    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'CoreComponent', 'selector': 'app-core'},{'name': 'DashboardComponent', 'selector': 'app-dashboard'},{'name': 'DatepickerComponent', 'selector': 'app-datepicker'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'UserComponent', 'selector': 'app-user'}];
+        var COMPONENT_TEMPLATE = '<div><!-- <ng-container *ngFor="let user of usersList$ | async">    <p>{{user | json}}</p></ng-container> --><p>{{\'home\' | translate}}</p><!-- <h1>{{\'barsha\' | translate}}</h1> --></div>'
+    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'CoreComponent', 'selector': 'app-core'},{'name': 'DashboardComponent', 'selector': 'app-dashboard'},{'name': 'DataTableComponent', 'selector': 'app-data-table'},{'name': 'DatepickerComponent', 'selector': 'app-datepicker'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'UserComponent', 'selector': 'app-user'}];
     var DIRECTIVES = [{'name': 'DatePickerDirective', 'selector': '[appDatePicker]'}];
     var ACTUAL_COMPONENT = {'name': 'HomeComponent'};
 </script>

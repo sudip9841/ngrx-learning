@@ -14,6 +14,7 @@ import { selectAllUser } from 'src/app/store/selectors/user.selector';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
+  src = 'http://localhost:9000/core/dashboard'
   usersList$:Observable<User[]>;
   constructor(private store:Store<{users:UserState}>,private translate: TranslateService,
     private localStorageService:LocalStorageService

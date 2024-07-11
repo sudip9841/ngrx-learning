@@ -7,6 +7,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { LocalLangChangePipe } from './pipes/local-lang-change/local-lang-change.pipe';
 import { HttpClientModule } from '@angular/common/http';
 import { EngToNepNumberPipe } from './pipes/eng-to-nep-number/eng-to-nep-number.pipe';
+import { TabIframeComponent } from './components/tab-iframe/tab-iframe.component';
 
 
 
@@ -15,7 +16,8 @@ import { EngToNepNumberPipe } from './pipes/eng-to-nep-number/eng-to-nep-number.
     DatepickerComponent,
     DatePickerDirective,
     LocalLangChangePipe,
-    EngToNepNumberPipe
+    EngToNepNumberPipe,
+    TabIframeComponent
   ],
   imports: [
     CommonModule,
@@ -32,7 +34,8 @@ import { EngToNepNumberPipe } from './pipes/eng-to-nep-number/eng-to-nep-number.
     // TranslateModule,
     LocalLangChangePipe,
     HttpClientModule,
-    EngToNepNumberPipe
+    EngToNepNumberPipe,
+    TabIframeComponent
   ]
 })
 export class SharedModule { }
